@@ -98,16 +98,11 @@ int main(void) {
   body[2].y = MID_Y;
   body[3].y = MID_Y;
   
-  if ((mainwin = initscr()) == NULL) {
-    perror("error initialising ncurses");
-    exit(EXIT_FAILURE);
-  }
-
-  halfdelay(1);
   initscr();
+  halfdelay(1);
   noecho();
   curs_set(FALSE);
-  keypad(mainwin, TRUE);
+  keypad(stdscr, TRUE);
   refresh();
   
   while (1) {
