@@ -80,7 +80,6 @@ void moveRight(head * head, body * body) {
 
 int main(void) {
 
-  WINDOW * mainwin;
   int ch; 
   int time_before_getch, time_after_fetch, elapsed_time;
   
