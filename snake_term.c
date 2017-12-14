@@ -153,7 +153,7 @@ int main(void) {
     case 'Q':
     case 'q':
       endwin();
-      exit(0);
+      exit(EXIT_SUCCESS);
     }
     clear();
     mvprintw(head.y, head.x, "s");
@@ -163,7 +163,4 @@ int main(void) {
     mvprintw(body[3].y, body[3].x, "e");
     refresh();
   }
-
-  endwin();
-  return EXIT_SUCCESS;
 }
