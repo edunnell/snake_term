@@ -56,16 +56,26 @@ void moveRight(coordinate * head, coordinate * body, int body_length) {
 
 int main(void) {
   int ch;
+
   coordinate head = {MID_X, MID_Y};
-  coordinate body[10];
+  coordinate body[30];
   int body_length = 4;
-  
+
+  coordinate apples[25];
+  int apple_count = 10;
+
   void (*previous_fun_ptr)(struct coordinate *, struct coordinate *, int) = moveLeft;
 
   int i;
   for(i = 0; i < body_length; ++i) {
     body[i].x = MID_X+i+1;
     body[i].y = MID_Y;
+  }
+
+  srand (time(NULL));
+  for(i = 0; i < apple_count; ++i) {
+    apples[i].x = rand()%(COLS+1);
+    apples[i].y = rand()%(ROWS+1);
   }
   
   initscr();
@@ -76,7 +86,6 @@ int main(void) {
   refresh();
   
   while (1) {
-    previous_fun_ptr(&head, body, body_length);
     ch = getch();
     switch (ch) {
       
@@ -113,6 +122,7 @@ int main(void) {
       break;
 
     case -1:
+      previous_fun_ptr(&head, body, body_length);
       break;
 
     case 'Q':
@@ -122,10 +132,23 @@ int main(void) {
     }
 
     clear();
+
+    int i;
+    for(i = 1; i < apple_count; ++i) {
+      if(apples[i].x != -1) {
+        if(apples[i].x == head.x && apples[i].y == head.y) {
+          apples[i].x = -1;
+          ++body_length;
+        } else {
+          if(apples[i].x != -1)
+            mvprintw(apples[i].y, apples[i].x, "@");
+        }
+      }
+    }
+    
     mvprintw(head.y, head.x, "s");
     mvprintw(body[0].y, body[0].x, "n");
 
-    int i;
     for(i = 1; i < body_length-2; ++i)
       mvprintw(body[i].y, body[i].x, "a");
 
