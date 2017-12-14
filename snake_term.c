@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <time.h>
 #include <curses.h>
 
 #define ROWS 25
@@ -121,6 +120,7 @@ int main(void) {
       endwin();
       exit(EXIT_SUCCESS);
     }
+
     clear();
     mvprintw(head.y, head.x, "s");
     mvprintw(body[0].y, body[0].x, "n");
